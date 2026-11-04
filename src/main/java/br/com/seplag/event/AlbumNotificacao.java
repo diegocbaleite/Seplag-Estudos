@@ -1,4 +1,4 @@
-package br.com.seplag.album;
+package br.com.seplag.event;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;

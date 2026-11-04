@@ -1,4 +1,4 @@
-package br.com.seplag.auth;
+package br.com.seplag.security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

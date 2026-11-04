@@ -1,4 +1,8 @@
-package br.com.seplag.auth;
+package br.com.seplag.config;
+
+import br.com.seplag.security.JwtAuthenticationFilter;
+import br.com.seplag.security.OriginFilter;
+import br.com.seplag.security.RateLimitFilter;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;

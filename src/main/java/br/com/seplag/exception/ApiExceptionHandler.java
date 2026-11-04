@@ -1,4 +1,4 @@
-package br.com.seplag.shared;
+package br.com.seplag.exception;
 
 import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
