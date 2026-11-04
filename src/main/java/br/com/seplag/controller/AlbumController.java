@@ -1,6 +1,10 @@
-package br.com.seplag.album;
+package br.com.seplag.controller;
 
-import br.com.seplag.artista.TipoArtista;
+import br.com.seplag.dto.AlbumDto;
+import br.com.seplag.dto.AlbumResponse;
+import br.com.seplag.model.TipoArtista;
+import br.com.seplag.service.AlbumService;
+
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.*;

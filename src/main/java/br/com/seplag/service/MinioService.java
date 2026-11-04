@@ -1,6 +1,7 @@
-package br.com.seplag.capa;
+package br.com.seplag.service;
 
-import br.com.seplag.shared.IntegracaoException;
+import br.com.seplag.exception.IntegracaoException;
+
 import io.minio.*;
 import io.minio.http.Method;
 import jakarta.annotation.PostConstruct;

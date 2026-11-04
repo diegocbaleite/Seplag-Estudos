@@ -1,4 +1,8 @@
-package br.com.seplag.artista;
+package br.com.seplag.controller;
+
+import br.com.seplag.dto.ArtistaDto;
+import br.com.seplag.dto.ArtistaResponse;
+import br.com.seplag.service.ArtistaService;
 
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;

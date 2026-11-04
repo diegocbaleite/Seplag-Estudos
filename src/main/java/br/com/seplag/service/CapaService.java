@@ -1,6 +1,8 @@
-package br.com.seplag.capa;
+package br.com.seplag.service;
 
-import br.com.seplag.album.AlbumService;
+import br.com.seplag.model.CapaAlbum;
+import br.com.seplag.repository.CapaRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

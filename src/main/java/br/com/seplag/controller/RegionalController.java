@@ -1,4 +1,6 @@
-package br.com.seplag.regional;
+package br.com.seplag.controller;
+
+import br.com.seplag.service.RegionalService;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

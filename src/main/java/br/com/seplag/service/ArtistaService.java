@@ -1,6 +1,11 @@
-package br.com.seplag.artista;
+package br.com.seplag.service;
 
-import br.com.seplag.shared.NaoEncontradoException;
+import br.com.seplag.dto.ArtistaDto;
+import br.com.seplag.dto.ArtistaResponse;
+import br.com.seplag.exception.NaoEncontradoException;
+import br.com.seplag.model.Artista;
+import br.com.seplag.repository.ArtistaRepository;
+
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

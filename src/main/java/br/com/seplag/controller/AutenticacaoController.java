@@ -1,4 +1,6 @@
-package br.com.seplag.auth;
+package br.com.seplag.controller;
+
+import br.com.seplag.security.JwtService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

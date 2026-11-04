@@ -1,4 +1,6 @@
-package br.com.seplag.capa;
+package br.com.seplag.controller;
+
+import br.com.seplag.service.CapaService;
 
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
