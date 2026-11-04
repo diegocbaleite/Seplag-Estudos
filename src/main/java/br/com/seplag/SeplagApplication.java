@@ -5,5 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SeplagApplication {
-    public static void main(String[] args) { SpringApplication.run(SeplagApplication.class, args); }
+    public static void main(String[] args)
+    { SpringApplication.run(SeplagApplication.class, args); }
 }
