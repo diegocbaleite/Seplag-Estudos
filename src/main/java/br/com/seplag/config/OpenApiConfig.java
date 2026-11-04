@@ -1,13 +1,40 @@
 package br.com.seplag.config;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.security.*;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springdoc.core.customizers.OpenApiCustomizer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@OpenAPIDefinition(info = @Info(title = "SEPLAG - API de Artistas e Álbuns", version = "v1"))
-@SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
-@SecurityRequirement(name = "bearerAuth")
-@org.springframework.context.annotation.Configuration
-public class OpenApiConfig {}
+import java.util.Collections;
 
+@Configuration
+public class OpenApiConfig {
+
+    @Bean
+    public OpenAPI seplagOpenApi() {
+        return new OpenAPI()
+            .info(new Info().title("SEPLAG - API de Artistas e Álbuns").version("v1"))
+            .components(new Components().addSecuritySchemes("bearerAuth",
+                new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
+            .addSecurityItem(new SecurityRequirement().addList("bearerAuth"));
+    }
+
+    @Bean
+    public OpenApiCustomizer manterLoginERenovacaoPublicos() {
+        return openApi -> {
+            if (openApi.getPaths() == null) {
+                return;
+            }
+            for (String caminho : new String[]{"/api/v1/auth/login", "/api/v1/auth/refresh"}) {
+                var operacao = openApi.getPaths().get(caminho);
+                if (operacao != null && operacao.getPost() != null) {
+                    operacao.getPost().setSecurity(Collections.emptyList());
+                }
+            }
+        };
+    }
+}
