@@ -1,6 +1,9 @@
-package br.com.seplag.album;
+package br.com.seplag.controller;
 
-import br.com.seplag.shared.ApiExceptionHandler;
+import br.com.seplag.dto.AlbumResponse;
+import br.com.seplag.exception.ApiExceptionHandler;
+import br.com.seplag.service.AlbumService;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;

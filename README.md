@@ -88,6 +88,29 @@ Exemplo de artista:
 {"nome":"Serj Tankian","tipo":"CANTOR"}
 ```
 
+## Organização dos pacotes (arquitetura em camadas)
+
+```text
+src/main/java/br/com/seplag/
+├── SeplagApplication.java
+├── model/       # Entidades JPA: Artista, Album, CapaAlbum, Regional e TipoArtista
+├── repository/  # Spring Data JPA
+├── service/     # Regras de negócio, MinIO e regionais
+├── controller/  # Endpoints REST versionados
+├── dto/         # Objetos de entrada e saída
+├── security/    # JWT, validação de origem e rate limit
+├── config/      # Spring Security, WebSocket e OpenAPI
+├── exception/   # Tratamento de erros
+└── event/       # Notificação de álbum criado
+
+src/test/java/br/com/seplag/
+├── controller/
+├── service/
+└── security/
+```
+
+A separação altera apenas a estrutura de pacotes e imports, sem adicionar funcionalidades fora do Anexo II-A do edital. O fluxo da API permanece `Controller → Service → Repository → PostgreSQL`.
+
 ## Arquitetura
 
 ```text

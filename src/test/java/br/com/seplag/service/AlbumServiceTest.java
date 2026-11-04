@@ -1,6 +1,14 @@
-package br.com.seplag.album;
+package br.com.seplag.service;
 
-import br.com.seplag.artista.*;
+import br.com.seplag.dto.AlbumDto;
+import br.com.seplag.event.AlbumCriadoEvent;
+import br.com.seplag.exception.NaoEncontradoException;
+import br.com.seplag.model.Album;
+import br.com.seplag.model.Artista;
+import br.com.seplag.model.TipoArtista;
+import br.com.seplag.repository.AlbumRepository;
+import br.com.seplag.repository.ArtistaRepository;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;

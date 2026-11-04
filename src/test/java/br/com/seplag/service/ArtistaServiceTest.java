@@ -1,6 +1,11 @@
-package br.com.seplag.artista;
+package br.com.seplag.service;
 
-import br.com.seplag.shared.NaoEncontradoException;
+import br.com.seplag.dto.ArtistaDto;
+import br.com.seplag.exception.NaoEncontradoException;
+import br.com.seplag.model.Artista;
+import br.com.seplag.model.TipoArtista;
+import br.com.seplag.repository.ArtistaRepository;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
