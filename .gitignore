@@ -1,0 +1,9 @@
+.idea/
+*.iml
+target/
+.env
+*.log
+.DS_Store
+
+# Configuracao local: a aplicacao utiliza application.yml versionado
+/src/main/resources/application.properties
