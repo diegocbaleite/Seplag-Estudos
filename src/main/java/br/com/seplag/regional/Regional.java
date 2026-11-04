@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "regional")
 public class Regional {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(name = "codigo_externo", nullable = false)
     private Integer codigoExterno;
     @Column(nullable = false, length = 200)
@@ -17,7 +17,7 @@ public class Regional {
     public Regional(Integer codigoExterno, String nome, boolean ativo) {
         this.codigoExterno = codigoExterno; this.nome = nome; this.ativo = ativo;
     }
-    public Long getId() { return id; }
+    public Integer getId() { return id; }
     public Integer getCodigoExterno() { return codigoExterno; }
     public String getNome() { return nome; }
     public boolean isAtivo() { return ativo; }

@@ -18,7 +18,7 @@ public class RegionalService {
     public RegionalService(RegionalRepository repository, @Value("${app.regionais-url}") String url) {
         this.repository = repository; this.url = url; this.cliente = RestClient.create();
     }
-    public record RegionalResponse(Long id, Integer codigoExterno, String nome, boolean ativo) {
+    public record RegionalResponse(Integer id, Integer codigoExterno, String nome, boolean ativo) {
         static RegionalResponse of(Regional r) {
             return new RegionalResponse(r.getId(), r.getCodigoExterno(), r.getNome(), r.isAtivo());
         }
@@ -69,7 +69,7 @@ public class RegionalService {
                 alterados++;
             }
         }
-        repository.flush(); // evita conflito com índice único de regionais ativas
+        repository.flush(); // desativa versões antigas antes das novas inserções
         for (Map.Entry<Integer, String> novo : externos.entrySet()) {
             inserir.add(new Regional(novo.getKey(), novo.getValue(), true));
             novos++;
