@@ -1,6 +1,8 @@
-package br.com.seplag.album;
+package br.com.seplag.repository;
 
-import br.com.seplag.artista.TipoArtista;
+import br.com.seplag.model.Album;
+import br.com.seplag.model.TipoArtista;
+
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;

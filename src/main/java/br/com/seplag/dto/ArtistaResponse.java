@@ -1,4 +1,7 @@
-package br.com.seplag.artista;
+package br.com.seplag.dto;
+
+import br.com.seplag.model.Artista;
+import br.com.seplag.model.TipoArtista;
 
 public record ArtistaResponse(Long id, String nome, TipoArtista tipo) {
     public static ArtistaResponse of(Artista artista) {

@@ -1,6 +1,5 @@
-package br.com.seplag.capa;
+package br.com.seplag.model;
 
-import br.com.seplag.album.Album;
 import jakarta.persistence.*;
 
 @Entity

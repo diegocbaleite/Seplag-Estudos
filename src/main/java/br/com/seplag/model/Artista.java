@@ -1,4 +1,4 @@
-package br.com.seplag.artista;
+package br.com.seplag.model;
 
 import jakarta.persistence.*;
 

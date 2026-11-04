@@ -1,4 +1,4 @@
-package br.com.seplag.album;
+package br.com.seplag.dto;
 
 import jakarta.validation.constraints.*;
 import java.util.Set;

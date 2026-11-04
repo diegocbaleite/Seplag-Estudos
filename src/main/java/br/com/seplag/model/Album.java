@@ -1,6 +1,5 @@
-package br.com.seplag.album;
+package br.com.seplag.model;
 
-import br.com.seplag.artista.Artista;
 import jakarta.persistence.*;
 import java.util.*;
 

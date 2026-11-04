@@ -1,4 +1,6 @@
-package br.com.seplag.capa;
+package br.com.seplag.repository;
+
+import br.com.seplag.model.CapaAlbum;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;

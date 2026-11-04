@@ -1,4 +1,6 @@
-package br.com.seplag.artista;
+package br.com.seplag.repository;
+
+import br.com.seplag.model.Artista;
 
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;

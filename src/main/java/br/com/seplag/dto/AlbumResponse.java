@@ -1,6 +1,7 @@
-package br.com.seplag.album;
+package br.com.seplag.dto;
 
-import br.com.seplag.artista.ArtistaResponse;
+import br.com.seplag.model.Album;
+
 import java.util.List;
 
 public record AlbumResponse(Long id, String titulo, List<ArtistaResponse> artistas) {

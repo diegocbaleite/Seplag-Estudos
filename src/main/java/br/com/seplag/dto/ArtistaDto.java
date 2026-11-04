@@ -1,4 +1,6 @@
-package br.com.seplag.artista;
+package br.com.seplag.dto;
+
+import br.com.seplag.model.TipoArtista;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

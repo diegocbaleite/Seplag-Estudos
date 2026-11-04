@@ -1,4 +1,4 @@
-package br.com.seplag.artista;
+package br.com.seplag.model;
 
 public enum TipoArtista { CANTOR, BANDA }
 

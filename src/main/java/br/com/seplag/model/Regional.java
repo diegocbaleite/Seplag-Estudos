@@ -1,4 +1,4 @@
-package br.com.seplag.regional;
+package br.com.seplag.model;
 
 import jakarta.persistence.*;
 
