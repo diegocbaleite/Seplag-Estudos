@@ -28,12 +28,14 @@ management:
         include: health
 app:
   origin: ${APP_ORIGIN:http://localhost:3000}
+  service-origin: ${APP_SERVICE_ORIGIN:http://localhost:8080}
   security:
     user: ${APP_AUTH_USER:admin}
     password: ${APP_AUTH_PASSWORD:}
     jwt-secret: ${APP_JWT_SECRET:}
   minio:
     url: ${MINIO_URL:http://localhost:9000}
+    public-url: ${MINIO_PUBLIC_URL:http://localhost:9000}
     access-key: ${MINIO_ROOT_USER:minioadmin}
     secret-key: ${MINIO_ROOT_PASSWORD:minioadmin}
     bucket: ${MINIO_BUCKET:capas}

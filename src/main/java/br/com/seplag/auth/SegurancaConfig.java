@@ -2,7 +2,6 @@ package br.com.seplag.auth;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -30,9 +29,10 @@ public class SegurancaConfig {
         return http.build();
     }
     @Bean
-    CorsConfigurationSource corsSource(@Value("${app.origin}") String allowedOrigin) {
+    CorsConfigurationSource corsSource(@Value("${app.origin}") String allowedOrigin,
+                                       @Value("${app.service-origin}") String serviceOrigin) {
         CorsConfiguration c = new CorsConfiguration();
-        c.setAllowedOrigins(List.of(allowedOrigin));
+        c.setAllowedOrigins(List.of(allowedOrigin, serviceOrigin));
         c.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS"));
         c.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         c.setMaxAge(3600L);
