@@ -1,12 +1,35 @@
-# Desafio SEPLAG 001/2026 — Back-End Java Sênior
+# SEPLAG Estudos — API REST com Java e Spring Boot
 
-Implementação de estudos do **Anexo II-A** do Edital de Processo Seletivo Conjunto nº 001/2026/SEPLAG. Este repositório contém apenas o escopo do desafio Back-End Java do edital; não representa inscrição ou entrega oficial (os prazos originais encerraram em fevereiro de 2026).
+Projeto pessoal desenvolvido **para estudos, prática e evolução no desenvolvimento backend com Java**. A aplicação gerencia artistas, álbuns e capas, reunindo autenticação, persistência de dados e integração com serviços externos em uma API REST.
+
+O escopo foi inspirado no desafio Back-End Java do **Anexo II-A do Edital nº 001/2026/SEPLAG**, utilizado como referência para exercitar requisitos de um projeto prático.
+
+> **Finalidade educacional:** este é um projeto independente de estudos e portfólio. Não possui vínculo oficial com a SEPLAG e não representa inscrição, participação ou entrega oficial no processo seletivo.
+
+## Objetivos de aprendizado
+
+- Praticar a construção de APIs REST com Java 21 e Spring Boot.
+- Organizar o código em camadas, separando endpoints, regras de negócio e acesso a dados.
+- Trabalhar com relacionamentos JPA, consultas, paginação e migrações de banco.
+- Aplicar autenticação JWT, validação de dados e tratamento de erros.
+- Integrar armazenamento de imagens com MinIO e notificações com WebSocket.
+- Exercitar testes unitários, documentação da API e execução com Docker Compose.
 
 ## Tecnologias
 
-Java 21, Spring Boot, Spring Data JPA/Hibernate, PostgreSQL, Flyway, JWT, MinIO, WebSocket (STOMP), Swagger/OpenAPI, Maven e Docker Compose. O edital permite Spring Boot ou Quarkus e exige o conjunto de funcionalidades; PostgreSQL é a opção de banco relacional adotada aqui.
+| Área | Tecnologias |
+|---|---|
+| Linguagem e build | Java 21 e Maven |
+| API e persistência | Spring Boot, Spring Data JPA/Hibernate e Bean Validation |
+| Banco de dados | PostgreSQL e Flyway |
+| Segurança | Spring Security e JWT |
+| Armazenamento de imagens | MinIO |
+| Notificações | WebSocket com STOMP |
+| Documentação e monitoramento | Swagger/OpenAPI e Spring Boot Actuator |
+| Testes | JUnit 5 e Mockito |
+| Ambiente de execução | Docker e Docker Compose |
 
-## Requisitos implementados no código
+## Funcionalidades
 
 - API REST versionada: `/api/v1`, com POST, PUT e GET.
 - Artistas do tipo `CANTOR` ou `BANDA` e álbuns em relação N:N; carga inicial dos exemplos do edital via Flyway.
@@ -37,7 +60,7 @@ Use JDK 21 e Maven. Inicie PostgreSQL e MinIO, configure as mesmas variáveis de
 
 ## Executar pelo IntelliJ IDEA (Java 21)
 
-1. Faça checkout da branch `feature/desafio-backend-java-seplag` e atualize com `git pull`.
+1. Utilize a branch `main`: execute `git checkout main` e `git pull origin main`.
 2. Abra o `pom.xml` como projeto Maven e configure o **Project SDK** como Java 21.
 3. Em **Run > Edit Configurations**, escolha a classe principal **`br.com.seplag.SeplagApplication`**. Remova configurações antigas que iniciem `br.com.seplag.Application`.
 4. Configure as variáveis de ambiente necessárias, sem gravar senhas no repositório: `APP_AUTH_PASSWORD`, `APP_JWT_SECRET` (Base64 de 32 bytes), `DB_URL`, `DB_USER`, `DB_PASSWORD`, `MINIO_URL`, `MINIO_ROOT_USER` e `MINIO_ROOT_PASSWORD`. Para o banco local existente, use as credenciais **do seu PostgreSQL** (os valores padrão do `application.yml` são apenas para o ambiente demonstrativo).
@@ -48,7 +71,7 @@ O projeto usa `src/main/resources/application.yml`. Não crie um `application.pr
 
 ## Autenticação
 
-Solicite acesso:
+Autentique-se com o usuário e a senha configurados no ambiente:
 
 ```http
 POST /api/v1/auth/login
@@ -120,22 +143,40 @@ src/test/java/br/com/seplag/
 └── security/
 ```
 
-A separação altera apenas a estrutura de pacotes e imports, sem adicionar funcionalidades fora do Anexo II-A do edital. O fluxo da API permanece `Controller → Service → Repository → PostgreSQL`.
+Os controllers recebem as requisições, os services concentram as regras de negócio e os repositories realizam o acesso ao banco de dados.
 
 ## Arquitetura
 
-```text
-Controller → Service → Repository → PostgreSQL
-                  ↘ MinIO (capas)
-                  ↘ WebSocket (evento de álbum criado)
-                  ↘ API externa (sincronização de regionais)
-```
+O fluxo principal segue **Controller → Service → Repository → PostgreSQL**.
+
+Os serviços também integram o MinIO para armazenar capas, publicam eventos de novos álbuns para notificações via WebSocket e consultam a API externa para sincronizar regionais.
 
 Artistas e álbuns possuem relacionamento muitos-para-muitos na tabela `artista_album`. A tabela `regional` tem `id`, `nome`, `ativo` e `codigo_externo`: esse último campo permite associar cada versão do registro ao identificador retornado pela API externa, preservando histórico de alterações. A sincronização usa mapas para comparação linear em relação ao volume de registros.
 
-## Decisões, limites e prioridade
+## Testes e validação
 
-A prioridade foi atender o domínio, as consultas REST, a autenticação e os mecanismos exigidos na rubrica do Anexo III; na sequência, integrar recursos de nível sênior. JWT usa uma senha de usuário única configurada por ambiente para manter o exemplo mínimo. CORS e a validação do cabeçalho `Origin` restringem origens de navegadores, mas **não são garantia de bloqueio de clientes HTTP sem cabeçalho Origin**; o JWT protege os endpoints. O rate limiter em memória é apropriado à execução com uma única instância prevista no Compose. Não há interface front-end porque o edital permite escolher apenas o Back-End.
+Execute os testes automatizados com JDK 21 e Maven:
 
-**Validação:** a inclusão do código no repositório não comprova automaticamente seu funcionamento. Antes de qualquer entrega, execute `mvn test`, `docker compose up --build`, testes da API, WebSocket, URLs pré-assinadas e sincronização de regionais com o serviço externo disponível.
+```bash
+mvn clean test
+```
 
+Para validar as integrações, inicie os serviços com Docker Compose e confira:
+
+- Autenticação, renovação de tokens e acesso aos endpoints protegidos.
+- Cadastro, atualização, filtros e paginação de artistas e álbuns.
+- Upload de capas e acesso pelas URLs pré-assinadas.
+- Notificações de novos álbuns no tópico WebSocket.
+- Sincronização de regionais, quando a API externa estiver disponível.
+
+Os testes unitários não substituem a validação das integrações com PostgreSQL, MinIO e o serviço externo.
+
+## Decisões e limitações do estudo
+
+- **Autenticação:** utiliza um usuário configurado por variáveis de ambiente para simplificar o cenário de estudo.
+- **Limite de requisições:** o controle é mantido em memória por instância. Uma execução distribuída exigiria um mecanismo compartilhado.
+- **Origens:** CORS e a verificação de `Origin` restringem chamadas de navegadores; a autenticação JWT protege os endpoints.
+- **Integração externa:** a sincronização de regionais depende da disponibilidade e do formato de resposta do serviço consultado.
+- **Escopo:** o projeto concentra-se no backend; as funcionalidades podem ser exploradas pelo Swagger ou por um cliente HTTP.
+
+O repositório registra a aplicação prática dos conteúdos estudados e pode receber melhorias conforme o aprendizado avança.
