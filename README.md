@@ -35,6 +35,17 @@ As URLs pré-assinadas são emitidas usando `MINIO_PUBLIC_URL` (padrão: `http:/
 
 Use JDK 21 e Maven. Inicie PostgreSQL e MinIO, configure as mesmas variáveis de `.env.example` no ambiente e execute `mvn spring-boot:run`. Use `mvn test` para os testes. Os scripts Flyway criam as tabelas e inserem os artistas e álbuns automaticamente.
 
+## Executar pelo IntelliJ IDEA (Java 21)
+
+1. Faça checkout da branch `feature/desafio-backend-java-seplag` e atualize com `git pull`.
+2. Abra o `pom.xml` como projeto Maven e configure o **Project SDK** como Java 21.
+3. Em **Run > Edit Configurations**, escolha a classe principal **`br.com.seplag.SeplagApplication`**. Remova configurações antigas que iniciem `br.com.seplag.Application`.
+4. Configure as variáveis de ambiente necessárias, sem gravar senhas no repositório: `APP_AUTH_PASSWORD`, `APP_JWT_SECRET` (Base64 de 32 bytes), `DB_URL`, `DB_USER`, `DB_PASSWORD`, `MINIO_URL`, `MINIO_ROOT_USER` e `MINIO_ROOT_PASSWORD`. Para o banco local existente, use as credenciais **do seu PostgreSQL** (os valores padrão do `application.yml` são apenas para o ambiente demonstrativo).
+5. Inicie PostgreSQL e MinIO, depois execute `mvn clean test` e **Run 'SeplagApplication'**.
+6. Confirme no console `Starting SeplagApplication` e `Found 4 JPA repository interfaces` antes de abrir `http://localhost:8080/swagger-ui/index.html`.
+
+O projeto usa `src/main/resources/application.yml`. Não crie um `application.properties` com configurações duplicadas. A rota `/login` **não** é utilizada: a autenticação é por `POST /api/v1/auth/login`, seguida do botão **Authorize** no Swagger, colando apenas `accessToken`. Quando o Swagger estiver autorizado, o Curl de endpoints protegidos deverá apresentar o cabeçalho `Authorization: Bearer ...`. Tokens de acesso expiram em cinco minutos.
+
 ## Autenticação
 
 Solicite acesso:
