@@ -20,6 +20,8 @@ public class SegurancaConfig {
     SecurityFilterChain security(HttpSecurity http, JwtAuthenticationFilter jwt,
                                   RateLimitFilter rate, OriginFilter origin) throws Exception {
         http.csrf(csrf -> csrf.disable())
+            .formLogin(form -> form.disable())
+            .httpBasic(basic -> basic.disable())
             .cors(Customizer.withDefaults())
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(a -> a
