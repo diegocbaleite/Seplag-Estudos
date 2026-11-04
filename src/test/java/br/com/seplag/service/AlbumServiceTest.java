@@ -37,7 +37,7 @@ class AlbumServiceTest {
     @Test
     void rejeitaArtistaInexistente() {
         when(artistas.findAllById(any())).thenReturn(List.of());
-        assertThrows(br.com.seplag.shared.NaoEncontradoException.class,
+        assertThrows(NaoEncontradoException.class,
             () -> service.criar(new AlbumDto("Teste", Set.of(45L))));
         verify(albums, never()).save(any());
     }
